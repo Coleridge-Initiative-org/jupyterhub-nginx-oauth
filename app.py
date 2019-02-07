@@ -77,7 +77,8 @@ def oauth_callback():
     app.logger.debug("final next_url = %s" % next_url)
     response = make_response(redirect(next_url))
     response.set_cookie(auth.state_cookie_name, value="", expires=datetime.datetime.utcnow())
-    response.set_cookie(auth.cookie_name, value=token, httponly=True, secure=True, path=os.environ.get('JUPYTERHUB_SERVICE_PREFIX', '/'), expires=datetime.datetime.utcnow()+datetime.timedelta(minutes=30))
+    #response.set_cookie(auth.cookie_name, value=token, httponly=True, secure=True, path=os.environ.get('JUPYTERHUB_SERVICE_PREFIX', '/'), expires=datetime.datetime.utcnow()+datetime.timedelta(minutes=30))
+    response.set_cookie(auth.cookie_name, value=token, httponly=True, secure=True, path=os.environ.get('JUPYTERHUB_SERVICE_PREFIX', '/'))
     app.logger.debug("Response Headers = " + str(response.headers))
     return response
     
