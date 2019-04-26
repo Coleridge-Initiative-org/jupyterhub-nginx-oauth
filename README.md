@@ -1,3 +1,5 @@
+[![Build Status](https://jenkins.dev.adrf.cloud/buildStatus/icon?job=jupyterhub-nginx-oauth%2Fjenkins)](https://jenkins.dev.adrf.cloud/job/jupyterhub-nginx-oauth/)
+
 # jupyterhub-nginx-oauth
 Authenticate a JupyterHub Service running behind an Nginx using JHub Oauth features.
 
