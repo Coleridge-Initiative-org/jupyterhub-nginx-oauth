@@ -44,11 +44,19 @@ pipeline {
 //                junit '**/target/*.xml'
             }
         }
-        stage('QA') {
-            steps {
-                echo 'Checking code..'
-            }
-        }
+        stage('Sonarqube') {
+	    environment {
+		scannerHome = tool 'SonarQubeScanner'
+	    }
+	    steps {
+		withSonarQubeEnv('ADRF Sonar') {
+		    sh "${scannerHome}/bin/sonar-scanner"
+		}
+		timeout(time: 10, unit: 'MINUTES') {
+		    waitForQualityGate abortPipeline: true
+		}
+	    }
+	}
 
         stage('Push Image') {
             steps {
