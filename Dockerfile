@@ -1,6 +1,6 @@
 FROM alpine
 MAINTAINER Rafael Ladislau <rafael.ladislau@nyu.edu>
-RUN apk add --no-cache python3 && \
+RUN apk add --no-cache openssl-dev libffi-dev musl-dev python3-dev python3 gcc && \
     python3 -m ensurepip && \
     rm -r /usr/lib/python*/ensurepip && \
     pip3 install --upgrade pip setuptools && \
@@ -10,7 +10,7 @@ RUN apk add --no-cache python3 && \
     
 RUN pip3 install jupyterhub flask
 
-RUN apk add --no-cache uwsgi uwsgi-python3
+RUN apk add --no-cache uwsgi-python
 
 # application folder
 RUN mkdir -p /usr/src/app
