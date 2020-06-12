@@ -23,5 +23,14 @@ EXPOSE 9095
 # copy config files into filesystem
 COPY app.py /usr/src/app/app.py
 
+# anchore fix of jquery 3.5.1
+RUN apk add --update npm
+
+RUN cd /usr/share/jupyterhub/static/components/ \
+    && rm -r jquery \
+    && npm install jquery@^3.5.0
+
+RUN npm uninstall npm -g
+
 # exectute start up script
 ENTRYPOINT [ "uwsgi", "--http-socket", "0.0.0.0:9095", "--uid", "uwsgi", "--plugins", "python3", "--protocol", "uwsgi", "--mount", "/usr/src/app/=app:app" ]
